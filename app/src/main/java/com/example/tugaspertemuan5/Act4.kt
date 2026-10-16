@@ -203,6 +203,66 @@ fun FormContent() {
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_small)))
 
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacer_medium))
+        ) {
+            OutlinedTextField(
+                value = tglLahir,
+                onValueChange = { tglLahir = it },
+                label = { Text(stringResource(id = R.string.dob)) },
+                readOnly = true,
+                trailingIcon = {
+                    IconButton(onClick = { showDatePicker = true }) {
+                        Icon(
+                            imageVector = Icons.Default.DateRange,
+                            contentDescription = stringResource(id = R.string.content_desc_calendar)
+                        )
+                    }
+                },
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small)),
+                modifier = Modifier.weight(1f)
+            )
+
+            ExposedDropdownMenuBox(
+                expanded = expandedExperience,
+                onExpandedChange = { expandedExperience = it },
+                modifier = Modifier.weight(1f)
+            ) {
+                OutlinedTextField(
+                    value = experience,
+                    onValueChange = {
+                        experience = it
+                        expandedExperience = true
+                    },
+                    label = { Text(stringResource(id = R.string.experience)) },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedExperience)
+                    },
+                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small)),
+                    modifier = Modifier
+                        .menuAnchor()
+                        .fillMaxWidth()
+                )
+                ExposedDropdownMenu(
+                    expanded = expandedExperience,
+                    onDismissRequest = { expandedExperience = false }
+                ) {
+                    experienceOptions.forEach { selectionOption ->
+                        DropdownMenuItem(
+                            text = { Text(selectionOption) },
+                            onClick = {
+                                experience = selectionOption
+                                expandedExperience = false
+                            }
+                        )
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_large)))
+
 
     }
 }
