@@ -86,5 +86,40 @@ fun FormContent() {
 
     val scrollState = rememberScrollState()
 
+    var showDatePicker by remember { mutableStateOf(false) }
+    val datePickerState = rememberDatePickerState(
+        selectableDates = object : SelectableDates {
+            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                return utcTimeMillis <= System.currentTimeMillis()
+            }
+        }
+    )
 
+    var expandedExperience by remember { mutableStateOf(false) }
+    val experienceOptions = stringArrayResource(id = R.array.experience_options)
+
+    if (showDatePicker) {
+        DatePickerDialog(
+            onDismissRequest = { showDatePicker = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    datePickerState.selectedDateMillis?.let { millis ->
+                        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                        tglLahir = formatter.format(Date(millis))
+                    }
+                    showDatePicker = false
+                }) {
+                    Text(stringResource(id = R.string.btn_ok))
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDatePicker = false }) {
+                    Text(stringResource(id = R.string.btn_cancel))
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
     }
+
+}
