@@ -26,3 +26,21 @@ import androidx.compose.ui.unit.sp
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
+@Composable
+fun BiodataLayout(modifier: Modifier = Modifier) {
+    Scaffold(
+        modifier = modifier
+            .fillMaxSize()
+            .imePadding()
+    ) { innerPadding ->
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .background(colorResource(id = R.color.black))
+        ) {
+        }
+    }
+}
