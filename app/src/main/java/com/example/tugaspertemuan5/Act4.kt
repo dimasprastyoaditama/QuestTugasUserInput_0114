@@ -41,6 +41,16 @@ fun BiodataLayout(modifier: Modifier = Modifier) {
                 .padding(innerPadding)
                 .background(colorResource(id = R.color.black))
         ) {
-        }
-    }
+            Image(
+                painter = painterResource(id = R.drawable.sapidermen),
+                contentDescription = stringResource(id = R.string.content_desc_bg),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.45f)
+                    .align(Alignment.TopCenter)
+            )
+
+        }}
 }
