@@ -16,4 +16,5 @@
         <item>2 Tahun</item>
         <item>3+ Tahun</item>
     </string-array>
+    <string name="skill_label">Pilih Skill Anda :</string>
     </resources>
