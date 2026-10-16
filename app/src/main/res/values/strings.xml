@@ -23,4 +23,8 @@
     <string name="btn_proceed">Proceed</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Batal</string>
-    </resources>
+    <string name="content_desc_bg">Background Image</string>
+    <string name="content_desc_calendar">Ikon Kalender</string>
+    <string name="content_desc_dropdown">Ikon Dropdown</string>
+    <string name="msg_submit_success">Data berhasil dikirim!</string>
+</resources>
