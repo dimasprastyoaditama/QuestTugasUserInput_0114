@@ -122,4 +122,20 @@ fun FormContent() {
         }
     }
 
-}
+    val isEmailValid = email.endsWith("@gmail.com")
+    val isEmailError = email.isNotEmpty() && !isEmailValid
+
+    // Mengecek apakah minimal ada 1 skill yang dicentang
+    val isSkillSelected = checkAndroid || checkUiUx || checkWeb
+
+    // Form valid JIKA semua terisi, email benar, DAN minimal 1 skill dicentang
+    val isFormValid = namaDepan.isNotBlank() &&
+            namaBelakang.isNotBlank() &&
+            email.isNotBlank() &&
+            isEmailValid &&
+            tglLahir.isNotBlank() &&
+            experience.isNotBlank() &&
+            isSkillSelected
+
+
+    }
