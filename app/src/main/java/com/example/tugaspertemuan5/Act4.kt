@@ -165,5 +165,44 @@ fun FormContent() {
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_xlarge)))
 
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacer_medium))
+        ) {
+            OutlinedTextField(
+                value = namaDepan,
+                onValueChange = { namaDepan = it },
+                label = { Text(stringResource(id = R.string.first_name)) },
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small)),
+                modifier = Modifier.weight(1f)
+            )
+            OutlinedTextField(
+                value = namaBelakang,
+                onValueChange = { namaBelakang = it },
+                label = { Text(stringResource(id = R.string.last_name)) },
+                shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small)),
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_medium)))
+
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text(stringResource(id = R.string.email)) },
+            isError = isEmailError,
+            supportingText = {
+                if (isEmailError) {
+                    Text(text = stringResource(id = R.string.error_email))
+                }
+            },
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small)),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_small)))
+
+
     }
 }
