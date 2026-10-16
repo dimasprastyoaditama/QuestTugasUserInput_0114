@@ -306,3 +306,16 @@ fun FormContent() {
         }
     }
 }
+
+@Composable
+fun SkillCheckbox(label: String, isChecked: Boolean, onCheckedChange: (Boolean) -> Unit) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Checkbox(
+            checked = isChecked,
+            onCheckedChange = onCheckedChange
+        )
+        Text(text = label, fontSize = 12.sp)
+    }
+}
