@@ -17,4 +17,7 @@
         <item>3+ Tahun</item>
     </string-array>
     <string name="skill_label">Pilih Skill Anda :</string>
+    <string name="skill_android">Android</string>
+    <string name="skill_uiux">UI/UX</string>
+    <string name="skill_web">Web</string>
     </resources>
