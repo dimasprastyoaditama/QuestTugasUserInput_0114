@@ -263,6 +263,32 @@ fun FormContent() {
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_large)))
 
+        Text(
+            text = stringResource(id = R.string.skill_label),
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.align(Alignment.Start),
+            color = colorResource(id = R.color.black_text)
+        )
 
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            SkillCheckbox(
+                label = stringResource(id = R.string.skill_android),
+                isChecked = checkAndroid
+            ) { checkAndroid = it }
+            SkillCheckbox(
+                label = stringResource(id = R.string.skill_uiux),
+                isChecked = checkUiUx
+            ) { checkUiUx = it }
+            SkillCheckbox(
+                label = stringResource(id = R.string.skill_web),
+                isChecked = checkWeb
+            ) { checkWeb = it }
+        }
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_xlarge)))
     }
 }
