@@ -6,5 +6,6 @@
     <dimen name="corner_radius_small">12dp</dimen>
     <dimen name="spacer_small">8dp</dimen>
     <dimen name="spacer_medium">12dp</dimen>
-
+    <dimen name="spacer_large">16dp</dimen>
+    <dimen name="spacer_xlarge">24dp</dimen>
 </resources>
