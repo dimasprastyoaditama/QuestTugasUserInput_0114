@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TugasPertemuan5Theme {
-
+                BiodataLayout()
             }
         }
     }
