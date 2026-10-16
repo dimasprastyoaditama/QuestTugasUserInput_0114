@@ -275,20 +275,34 @@ fun FormContent() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            SkillCheckbox(
-                label = stringResource(id = R.string.skill_android),
-                isChecked = checkAndroid
-            ) { checkAndroid = it }
-            SkillCheckbox(
-                label = stringResource(id = R.string.skill_uiux),
-                isChecked = checkUiUx
-            ) { checkUiUx = it }
-            SkillCheckbox(
-                label = stringResource(id = R.string.skill_web),
-                isChecked = checkWeb
-            ) { checkWeb = it }
+            SkillCheckbox(label = stringResource(id = R.string.skill_android), isChecked = checkAndroid) { checkAndroid = it }
+            SkillCheckbox(label = stringResource(id = R.string.skill_uiux), isChecked = checkUiUx) { checkUiUx = it }
+            SkillCheckbox(label = stringResource(id = R.string.skill_web), isChecked = checkWeb) { checkWeb = it }
         }
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_xlarge)))
+
+        Button(
+            onClick = {
+                Toast.makeText(context, context.getString(R.string.msg_submit_success), Toast.LENGTH_SHORT).show()
+            },
+            enabled = isFormValid,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(dimensionResource(id = R.dimen.button_height)),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(id = R.color.purple_title),
+                contentColor = colorResource(id = R.color.white_button_text),
+                disabledContainerColor = colorResource(id = R.color.gray_button),
+                disabledContentColor = colorResource(id = R.color.white_button_text)
+            ),
+            shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small))
+        ) {
+            Text(
+                text = stringResource(id = R.string.btn_proceed),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
+            )
+        }
     }
 }
