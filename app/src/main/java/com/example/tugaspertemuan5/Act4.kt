@@ -52,5 +52,19 @@ fun BiodataLayout(modifier: Modifier = Modifier) {
                     .align(Alignment.TopCenter)
             )
 
-        }}
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.70f)
+                    .align(Alignment.BottomCenter)
+                    .clip(RoundedCornerShape(
+                        topStart = dimensionResource(id = R.dimen.corner_radius_large),
+                        topEnd = dimensionResource(id = R.dimen.corner_radius_large)
+                    ))
+                    .background(colorResource(id = R.color.white))
+            ) {
+                FormContent()
+            }
+        }
+    }
 }
