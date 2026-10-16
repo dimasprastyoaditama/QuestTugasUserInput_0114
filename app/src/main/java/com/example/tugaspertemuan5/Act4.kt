@@ -137,5 +137,33 @@ fun FormContent() {
             experience.isNotBlank() &&
             isSkillSelected
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .imePadding()
+            .padding(
+                horizontal = dimensionResource(id = R.dimen.padding_horizontal),
+                vertical = dimensionResource(id = R.dimen.padding_vertical)
+            )
+            .verticalScroll(scrollState),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(id = R.string.form_title),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = colorResource(id = R.color.purple_title)
+        )
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_small)))
+
+        Text(
+            text = stringResource(id = R.string.form_subtitle),
+            fontSize = 12.sp,
+            color = colorResource(id = R.color.gray_subtitle)
+        )
+
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_xlarge)))
 
     }
+}
