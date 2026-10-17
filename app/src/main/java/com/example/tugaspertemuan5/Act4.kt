@@ -84,6 +84,9 @@ fun FormContent() {
     var checkUiUx by remember { mutableStateOf(false) }
     var checkWeb by remember { mutableStateOf(false) }
 
+    // State untuk memunculkan kotak hasil
+    var isSubmitted by remember { mutableStateOf(false) }
+
     val scrollState = rememberScrollState()
 
     var showDatePicker by remember { mutableStateOf(false) }
@@ -124,11 +127,8 @@ fun FormContent() {
 
     val isEmailValid = email.endsWith("@gmail.com")
     val isEmailError = email.isNotEmpty() && !isEmailValid
-
-    // Mengecek apakah minimal ada 1 skill yang dicentang
     val isSkillSelected = checkAndroid || checkUiUx || checkWeb
 
-    // Form valid JIKA semua terisi, email benar, DAN minimal 1 skill dicentang
     val isFormValid = namaDepan.isNotBlank() &&
             namaBelakang.isNotBlank() &&
             email.isNotBlank() &&
@@ -171,14 +171,14 @@ fun FormContent() {
         ) {
             OutlinedTextField(
                 value = namaDepan,
-                onValueChange = { namaDepan = it },
+                onValueChange = { namaDepan = it; isSubmitted = false },
                 label = { Text(stringResource(id = R.string.first_name)) },
                 shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small)),
                 modifier = Modifier.weight(1f)
             )
             OutlinedTextField(
                 value = namaBelakang,
-                onValueChange = { namaBelakang = it },
+                onValueChange = { namaBelakang = it; isSubmitted = false },
                 label = { Text(stringResource(id = R.string.last_name)) },
                 shape = RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small)),
                 modifier = Modifier.weight(1f)
@@ -189,7 +189,7 @@ fun FormContent() {
 
         OutlinedTextField(
             value = email,
-            onValueChange = { email = it },
+            onValueChange = { email = it; isSubmitted = false },
             label = { Text(stringResource(id = R.string.email)) },
             isError = isEmailError,
             supportingText = {
@@ -209,7 +209,7 @@ fun FormContent() {
         ) {
             OutlinedTextField(
                 value = tglLahir,
-                onValueChange = { tglLahir = it },
+                onValueChange = { tglLahir = it; isSubmitted = false },
                 label = { Text(stringResource(id = R.string.dob)) },
                 readOnly = true,
                 trailingIcon = {
@@ -234,6 +234,7 @@ fun FormContent() {
                     onValueChange = {
                         experience = it
                         expandedExperience = true
+                        isSubmitted = false
                     },
                     label = { Text(stringResource(id = R.string.experience)) },
                     trailingIcon = {
@@ -254,6 +255,7 @@ fun FormContent() {
                             onClick = {
                                 experience = selectionOption
                                 expandedExperience = false
+                                isSubmitted = false
                             }
                         )
                     }
@@ -275,15 +277,16 @@ fun FormContent() {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            SkillCheckbox(label = stringResource(id = R.string.skill_android), isChecked = checkAndroid) { checkAndroid = it }
-            SkillCheckbox(label = stringResource(id = R.string.skill_uiux), isChecked = checkUiUx) { checkUiUx = it }
-            SkillCheckbox(label = stringResource(id = R.string.skill_web), isChecked = checkWeb) { checkWeb = it }
+            SkillCheckbox(label = stringResource(id = R.string.skill_android), isChecked = checkAndroid) { checkAndroid = it; isSubmitted = false }
+            SkillCheckbox(label = stringResource(id = R.string.skill_uiux), isChecked = checkUiUx) { checkUiUx = it; isSubmitted = false }
+            SkillCheckbox(label = stringResource(id = R.string.skill_web), isChecked = checkWeb) { checkWeb = it; isSubmitted = false }
         }
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_xlarge)))
 
         Button(
             onClick = {
+                isSubmitted = true // Memunculkan kotak hasil
                 Toast.makeText(context, context.getString(R.string.msg_submit_success), Toast.LENGTH_SHORT).show()
             },
             enabled = isFormValid,
@@ -303,6 +306,46 @@ fun FormContent() {
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
             )
+        }
+
+        // KOTAK HASIL YANG MUNCUL SETELAH TOMBOL DITEKAN
+        if (isSubmitted) {
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_large)))
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(dimensionResource(id = R.dimen.corner_radius_small)))
+                    .background(colorResource(id = R.color.black))
+                    .padding(dimensionResource(id = R.dimen.spacer_large))
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    val skillsList = mutableListOf<String>()
+                    if (checkAndroid) skillsList.add(stringResource(id = R.string.skill_android))
+                    if (checkUiUx) skillsList.add(stringResource(id = R.string.skill_uiux))
+                    if (checkWeb) skillsList.add(stringResource(id = R.string.skill_web))
+                    val skillsString = skillsList.joinToString(", ")
+
+                    Text(text = stringResource(id = R.string.res_nama, namaDepan, namaBelakang), color = colorResource(id = R.color.white), fontSize = 14.sp)
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_small)))
+
+                    Text(text = stringResource(id = R.string.res_email, email), color = colorResource(id = R.color.white), fontSize = 14.sp)
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_small)))
+
+                    Text(text = stringResource(id = R.string.res_dob, tglLahir), color = colorResource(id = R.color.white), fontSize = 14.sp)
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_small)))
+
+                    Text(text = stringResource(id = R.string.res_exp, experience), color = colorResource(id = R.color.white), fontSize = 14.sp)
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacer_small)))
+
+                    Text(text = stringResource(id = R.string.res_skills, skillsString), color = colorResource(id = R.color.white), fontSize = 14.sp)
+                }
+            }
+
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_vertical)))
         }
     }
 }
