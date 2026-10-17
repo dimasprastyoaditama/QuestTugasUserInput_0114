@@ -27,4 +27,11 @@
     <string name="content_desc_calendar">Ikon Kalender</string>
     <string name="content_desc_dropdown">Ikon Dropdown</string>
     <string name="msg_submit_success">Data berhasil dikirim!</string>
+
+    <!-- Format Teks Hasil Submit -->
+    <string name="res_nama">Nama : %1$s %2$s</string>
+    <string name="res_email">Email : %1$s</string>
+    <string name="res_dob">Tgl Lahir : %1$s</string>
+    <string name="res_exp">Experience : %1$s</string>
+    <string name="res_skills">Skills : %1$s</string>
 </resources>
